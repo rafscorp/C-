@@ -9,6 +9,7 @@
 #define CYAN "\033[36m"
 #define BOLD "\033[1m"
 
+//Parte das definições e libs
 void limparTela()
 {
 #if defined(_WIN32)
@@ -17,7 +18,7 @@ void limparTela()
     system("clear");
 #endif
 }
-
+//Função de limpar a tela
 void ImprimeLine(int lin1)
 {
     for (int i = 0; i < 40; i++)
@@ -33,7 +34,7 @@ void ImprimeLine(int lin1)
     }
     printf("\n");
 }
-
+//imprime uma linha
 void ImprimeCabecalho(const char *titulo)
 {
     limparTela();
@@ -41,11 +42,11 @@ void ImprimeCabecalho(const char *titulo)
     printf(BOLD CYAN "                    %s\n" RESET, titulo);
     ImprimeLine(1);
 }
-
+//Imprime o Titulo
 float DinheiroFloat()
 {
     float totD;
-    float totC = 0;
+    float totC = 0;          //variavies
     float sac;
     float cMonetaria = 200;
     while (1)
@@ -139,7 +140,7 @@ float DinheiroFloat()
     }
 }
 
-int main()
+int main()   //codigo principal
 {
     ImprimeCabecalho("Bem-vindo ao Caixa eletrônico CYPRUS");
     printf(BOLD YELLOW "\n Entrando... - USUÁRIO - (" RESET BOLD CYAN " ADRIAN_RAFAEL " RESET BOLD YELLOW ")\n" RESET);
