@@ -2,6 +2,7 @@
 #include <stdbool.h>
 #include <math.h>
 #include <stdlib.h>
+#include <string.h>
 
 #ifdef _WIN32
 #include <windows.h>
@@ -115,11 +116,14 @@ void Linha(int tam, int tipo, int cor) {
     printf("\n");
 }
 
+void EspacoPrint(int tam) { for (int i = 0; i < tam; i++) printf(" "); }
+
 void Cabecalho(const char *title, int tipo) {
+
     if (tipo == 0) {
-        Linha(30, 0, 7);
-        printf(BOLD ITA GRN_B BLK_B_BK"                 %s                     \n" RST, title);
-        Linha(30, 0, 7);
+        Linha(39, 0, 1);
+        printf(BOLD ITA GRN_B BLK_B_BK "%s\n" RST, title);
+        Linha(39, 0, 1);
     } else if (tipo == 1) {
         Linha(39, 0, 1);
         printf(BOLD CYN "                        %s\n" RST, title);
