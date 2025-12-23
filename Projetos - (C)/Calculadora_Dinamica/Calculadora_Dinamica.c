@@ -331,7 +331,7 @@ int VerificaPA_Logica(float a1, float a2, float razao) {
     return 0;
 }
 
-//ver logica de historico de contas feitas para cada caso se der ate usar .txt ou so no tempo de compilação msm
+//ver logica de historico de contas feitas para cada caso se der ate usar .txt ou so no tempo de compilação mesmo
 
 bool VerificaPA_Interativo(float *a1, float *a2, float *razao) {
     while (1) {
