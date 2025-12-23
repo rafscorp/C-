@@ -228,14 +228,14 @@ void CalculadoraC(void) {
     int estado = 0;
     const char *OP[] = {
 
-      BOLD "     <  " CYN_BK "  -- " BLU_BK " Adição          " BOLD MAG_BK " [  +  ]" BOLD GRN_BK "    --ID = 1",
-      BOLD "     <  " CYN_BK "  -- " BLU_BK " Subtração       " BOLD MAG_BK " [  -  ]" BOLD GRN_BK "    --ID = 2",
-      BOLD "     <  " CYN_BK "  -- " BLU_BK " Multiplicação   " BOLD MAG_BK " [  x  ]" BOLD GRN_BK "    --ID = 3", 
-      BOLD "     <  " CYN_BK "  -- " BLU_BK " Divisão         " BOLD MAG_BK " [  ÷  ]" BOLD GRN_BK "    --ID = 4",
-      BOLD "     <  " CYN_BK "  -- " BLU_BK " Porcentagem     " BOLD MAG_BK " [  %  ]" BOLD GRN_BK "    --ID = 5",         
-      BOLD "     <  " CYN_BK "  -- " BLU_BK " Raiz Quadrada   " BOLD MAG_BK " [  2√ ]" BOLD GRN_BK "    --ID = 6",
-      BOLD "     <  " CYN_BK "  -- " BLU_BK " Potenciação     " BOLD MAG_BK " [  3² ]" BOLD GRN_BK "    --ID = 7",
-      BOLD "     <  " CYN_BK "  -- " BLU_BK " Saída           " BOLD MAG_BK " [ ExT ]" BOLD GRN_BK "    --ID = 8",
+      BOLD "     <  " CYN_BK " -- " BLU_BK " Adição          " BOLD MAG_BK " [  +  ]" BOLD GRN_BK "    --ID = 1",
+      BOLD "     <  " CYN_BK " -- " BLU_BK " Subtração       " BOLD MAG_BK " [  -  ]" BOLD GRN_BK "    --ID = 2",
+      BOLD "     <  " CYN_BK " -- " BLU_BK " Multiplicação   " BOLD MAG_BK " [  x  ]" BOLD GRN_BK "    --ID = 3", 
+      BOLD "     <  " CYN_BK " -- " BLU_BK " Divisão         " BOLD MAG_BK " [  ÷  ]" BOLD GRN_BK "    --ID = 4",
+      BOLD "     <  " CYN_BK " -- " BLU_BK " Porcentagem     " BOLD MAG_BK " [  %  ]" BOLD GRN_BK "    --ID = 5",         
+      BOLD "     <  " CYN_BK " -- " BLU_BK " Raiz Quadrada   " BOLD MAG_BK " [  2√ ]" BOLD GRN_BK "    --ID = 6",
+      BOLD "     <  " CYN_BK " -- " BLU_BK " Potenciação     " BOLD MAG_BK " [  3² ]" BOLD GRN_BK "    --ID = 7",
+      BOLD "     <  " CYN_BK " -- " BLU_BK " Saída           " BOLD MAG_BK " [ ExT ]" BOLD GRN_BK "    --ID = 8",
 
     }; 
 
@@ -326,10 +326,10 @@ bool VerificaPA_Interativo(float *a1, float *a2, float *razao) {
     while (1) {
         int code = VerificaPA_Logica(*a1, *a2, *razao);
         if (code == 0) return true;
-        if (code == 1) printf(RED_B_BK "A razão não pode ser 0!" RST "\n");
-        if (code == 2) printf(RED_B_BK "A razão de uma PA Crescente deve ser Positiva!" RST "\n");
-        if (code == 3) printf(RED_B_BK "A razão de uma PA Decrescente deve ser Negativa!" RST "\n");
-        if (code == 4 || code == 5) printf(RED_B_BK "A razão é maior que a diferença total!" RST "\n");
+        if (code == 1) printf("\n\n" RED_B_BK " A razão não pode ser 0! " RST "\n\n");
+        if (code == 2) printf("\n\n" RED_B_BK " A razão de uma PA Crescente deve ser Positiva! " RST "\n\n");
+        if (code == 3) printf("\n\n" RED_B_BK " A razão de uma PA Decrescente deve ser Negativa! " RST "\n\n");
+        if (code == 4 || code == 5) printf("\n\n" RED_B_BK " A razão é maior que a diferença total! " RST "\n\n");
         
         char esc = LerCharSN(BOLD CYN ITA "Deseja trocar algum dado para êxito? [S/N] " RST );
         if (esc == 'N') return false;
