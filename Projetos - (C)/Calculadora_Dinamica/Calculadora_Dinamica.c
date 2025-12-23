@@ -126,13 +126,12 @@ void Cabecalho(const char *title, int tipo) {
         Linha(39, 0, 1);
     } else if (tipo == 1) {
         Linha(39, 0, 1);
-        printf(BOLD CYN "                        %s\n" RST, title);
+        printf(BOLD ITA CYN "            %s\n" RST, title);
     }
 }
 
-void Resposta(int tipoP, float valor) {
-    if (tipoP == 0) printf("      < RESPOSTA >   %.1f\n", valor);
-    else printf("\n< RESPOSTA >  %.1f\n", valor);
+void Resposta(float valor) {
+    printf("      " BOLD BLK_B_BK " < RESPOSTA > " RST BOLD BLU_B_BK "  %.1f  " RST "\n" RST, valor);
 }
 
 void ClearInputUntilNewline(void) {
@@ -242,14 +241,14 @@ void CalculadoraC(void) {
     int estado = 0;
     const char *OP[] = {
 
-      BOLD "     <  " CYN_BK "  -- " BLU_BK " Adição          " BOLD MAG_BK " [  +  ]" BOLD GRN_BK "    --ID = ",
-      BOLD "     <  " CYN_BK "  -- " BLU_BK " Subtração       " BOLD MAG_BK " [  -  ]" BOLD GRN_BK "    --ID = ",
-      BOLD "     <  " CYN_BK "  -- " BLU_BK " Multiplicação   " BOLD MAG_BK " [  x  ]" BOLD GRN_BK "    --ID = ", 
-      BOLD "     <  " CYN_BK "  -- " BLU_BK " Divisão         " BOLD MAG_BK " [  ÷  ]" BOLD GRN_BK "    --ID = ",
-      BOLD "     <  " CYN_BK "  -- " BLU_BK " Porcentagem     " BOLD MAG_BK " [  %  ]" BOLD GRN_BK "    --ID = ",         
-      BOLD "     <  " CYN_BK "  -- " BLU_BK " Raiz Quadrada   " BOLD MAG_BK " [  2√ ]" BOLD GRN_BK "    --ID = ",
-      BOLD "     <  " CYN_BK "  -- " BLU_BK " Potenciação     " BOLD MAG_BK " [  3² ]" BOLD GRN_BK "    --ID = ",
-      BOLD "     <  " CYN_BK "  -- " BLU_BK " Saída           " BOLD MAG_BK " [ ExT ]" BOLD GRN_BK "    --ID = ",
+      BOLD "     <  " CYN_BK "  -- " BLU_BK " Adição          " BOLD MAG_BK " [  +  ]" BOLD GRN_BK "    --ID = 1",
+      BOLD "     <  " CYN_BK "  -- " BLU_BK " Subtração       " BOLD MAG_BK " [  -  ]" BOLD GRN_BK "    --ID = 2",
+      BOLD "     <  " CYN_BK "  -- " BLU_BK " Multiplicação   " BOLD MAG_BK " [  x  ]" BOLD GRN_BK "    --ID = 3", 
+      BOLD "     <  " CYN_BK "  -- " BLU_BK " Divisão         " BOLD MAG_BK " [  ÷  ]" BOLD GRN_BK "    --ID = 4",
+      BOLD "     <  " CYN_BK "  -- " BLU_BK " Porcentagem     " BOLD MAG_BK " [  %  ]" BOLD GRN_BK "    --ID = 5",         
+      BOLD "     <  " CYN_BK "  -- " BLU_BK " Raiz Quadrada   " BOLD MAG_BK " [  2√ ]" BOLD GRN_BK "    --ID = 6",
+      BOLD "     <  " CYN_BK "  -- " BLU_BK " Potenciação     " BOLD MAG_BK " [  3² ]" BOLD GRN_BK "    --ID = 7",
+      BOLD "     <  " CYN_BK "  -- " BLU_BK " Saída           " BOLD MAG_BK " [ ExT ]" BOLD GRN_BK "    --ID = 8",
 
     }; 
 
@@ -261,7 +260,7 @@ void CalculadoraC(void) {
             Linha(30, 1, 0);
             for (int i = 0; i < 8; ++i) {
                 // Primeira função Negrito para o sinal "<" e para as demais ate o RST = reset, depois Ciano para o "--" depois reset depois Azul para os valores do vetor  
-                printf(" %s  %d  " RST BOLD "  >  " "\n" RST , OP[i], i + 1);
+                printf(" %s " RST BOLD "  >  " "\n" RST , OP[i]);
                 slep(0.05f);
             }
             Linha(30, 1, 0);
@@ -280,12 +279,12 @@ void CalculadoraC(void) {
         } else if (estado == 1) {
             LimpaTela();
             Cabecalho("Calculadora - Científica", 0);
-            printf("\n");
-            Resposta(0, (float)resposta);
-            printf("\n\n< Operações Permitidas >\n");
+            printf("\n < Operações Permitidas >\n");
             Linha(39, 1, 0);
-            for (int i = 0; i < 8; ++i) printf(" %s  %d  " RST BOLD "  >  " "\n" RST , OP[i], i + 1);
+            for (int i = 0; i < 8; ++i) printf(" %s " RST BOLD "  >  " "\n" RST , OP[i]);
             Linha(39, 1, 0);
+            printf("\t\t");
+            Resposta((float)resposta);
             op = LerInt("\n     < Operador >   ");
             if (op < 1 || op > 8) {
                 LimpaTela();
@@ -303,20 +302,13 @@ void CalculadoraC(void) {
     }
 }
 
-// Fibonacci e vetor  |  OBS > Falta a logia de guardar...
-void GuardarVetor(const float *vetor, int tamanho) {
-    printf("\nValores armazenados: ");
-    for (int i = 0; i < tamanho; ++i) printf("%.0f ", vetor[i]);
-    printf("\n");
-}
-
 void GerarFibonacci(float *vet, int tamanho) {
     float t1 = 0.0f, t2 = 1.0f, t3 = 0.0f;
     for (int i = 0; i < tamanho; ++i) {
         vet[i] = t1;
-        printf("%.0f", t1);
+        printf(BLK_B_BK " %.0f " RST, t1);
         if (i < tamanho - 1) printf(" - ");
-        else printf(" >> ");
+        else printf(" >> \n" RST );
         t3 = t1 + t2;
         t1 = t2;
         t2 = t3;
@@ -326,12 +318,9 @@ void GerarFibonacci(float *vet, int tamanho) {
 void Fibonacci(int n) {
     if (n <= 0) return;
     float *vet = malloc((size_t)n * sizeof(float));
-    if (!vet) { printf("Erro ao alocar memória!\n"); return; }
+    if (!vet) { printf(RED_B_BK" Erro ao alocar memória! " RST "\n"); return; }
     GerarFibonacci(vet, n);
-    char opc = LerCharSN("   << Deseja Guardar o Vetor Para Alguma Operação? (S/N) > ");
-    if (opc == 'S' || opc == 's') GuardarVetor(vet, n);
-    else if (opc == 'n' || opc == 'N') { LimpaTela(); Cabecalho("Calculadora - UNI", 0); }
-    free(vet);
+    Linha(39, 2, 7);
 }
 
 /* PA: lógica e interação separadas */
@@ -341,6 +330,8 @@ int VerificaPA_Logica(float a1, float a2, float razao) {
     if (a1 > a2 && razao > 0.0f) return 3;
     return 0;
 }
+
+//ver logica de historico de contas feitas para cada caso se der ate usar .txt ou so no tempo de compilação msm
 
 bool VerificaPA_Interativo(float *a1, float *a2, float *razao) {
     while (1) {
@@ -391,53 +382,57 @@ void CalculadoraU(void) {
     float Fb = 0.0f;
     int choice = 0;
     const char *OP[] = {
-        "Adição\t\t[  +  ]",
-        "Subtração\t\t[  -  ]",
-        "Multiplicação\t[  x  ]",
-        "Divisão\t\t[  ÷  ]",
-        "Fibonacci\t\t[ 1-5 ]",
-        "Progressão Artm\t[ T-R ]",
-        "Saída     \t\t[ ExT ]"
+
+        BOLD "     <  " CYN_BK "  -- " BLU_BK " Adição          " BOLD MAG_BK " [  +  ]" BOLD GRN_BK "    --ID = 1 ",
+        BOLD "     <  " CYN_BK "  -- " BLU_BK " Subtração       " BOLD MAG_BK " [  -  ]" BOLD GRN_BK "    --ID = 2 ",
+        BOLD "     <  " CYN_BK "  -- " BLU_BK " Multiplicação   " BOLD MAG_BK " [  x  ]" BOLD GRN_BK "    --ID = 3 ", 
+        BOLD "     <  " CYN_BK "  -- " BLU_BK " Divisão         " BOLD MAG_BK " [  ÷  ]" BOLD GRN_BK "    --ID = 4 ",
+        BOLD "     <  " CYN_BK "  -- " BLU_BK " Fibonacci       " BOLD MAG_BK " [ 1-5 ]" BOLD GRN_BK "    --ID = 5 ",         
+        BOLD "     <  " CYN_BK "  -- " BLU_BK " Progressão      " BOLD MAG_BK " [ 2x5 ]" BOLD GRN_BK "    --ID = 6 ",
+        BOLD "     <  " CYN_BK "  -- " BLU_BK " Saída           " BOLD MAG_BK " [ ExT ]" BOLD GRN_BK "    --ID = 7 ",
     };
 
     Cabecalho("Calculadora - UNI", 0);
 
     while (1) {
         printf("\n");
-        printf("\n< Operações Permitidas >\n");
+        printf("\n" BOLD BLK_B_BK "< Operações Permitidas >" RST "\n");
         Linha(39, 1, 0);
 
         for (int i = 0; i < 7; ++i) {
-            printf("-- %s     --ID = %d\n", OP[i], i + 1);
+            printf(" %s " RST BOLD "  >  " "\n" RST , OP[i]);
             slep(0.05f);
             if (i == 6) { Linha(39, 1, 0); }
         }
 
-        choice = LerInt("\n< Escolha >  ");
+        choice = LerInt(" < Escolha > "); printf("\n");
+        Linha(39, 1, 0);
         if (choice < 1 || choice > 7) { printf("Dado Invalido\n"); continue; }
         if (choice == 1) {
-            num1 = LerDouble("< Número >   ");
-            num2 = LerDouble("< Número >   ");
-            LimpaTela(); Cabecalho("Calculadora - UNI", 0);
-            resultado = AdiU(num1, num2); Resposta(1, (float)resultado);
+            num1 = LerDouble(" < Número >   ");
+            num2 = LerDouble(" < Número >   ");
+            LimpaTela(); Cabecalho("Calculadora - UNI", 0); printf("\n");
+            resultado = AdiU(num1, num2);
         } else if (choice == 2) {
             num1 = LerDouble("< Número >   ");
             num2 = LerDouble("< Número >   ");
             LimpaTela(); Cabecalho("Calculadora - UNI", 0);
-            resultado = SubU(num1, num2); Resposta(1, (float)resultado);
+            resultado = SubU(num1, num2);
         } else if (choice == 3) {
             num1 = LerDouble("< Número >  ");
             num2 = LerDouble("< Número >  ");
             LimpaTela(); Cabecalho("Calculadora - UNI", 0);
-            resultado = MultiU(num1, num2); Resposta(1, (float)resultado);
+            resultado = MultiU(num1, num2);
         } else if (choice == 4) {
             num1 = LerDouble("< Número >   ");
             num2 = LerDouble("< Número >   ");
             LimpaTela(); Cabecalho("Calculadora - UNI", 0);
-            resultado = DiviU(num1, num2); Resposta(1, (float)resultado);
+            resultado = DiviU(num1, num2);
         } else if (choice == 5) {
-            Fb = (float)LerInt("Número de Termos: ");
+            Fb = (float)LerInt(" < Número de Termos: ");
+            printf("\n\n");
             Fibonacci((int)Fb);
+            continue;
         } else if (choice == 6) {
             float a1 = LerFloat("Digite o início da PA: ");
             float a2 = LerFloat("Digite o Número final da PA: ");
@@ -446,21 +441,23 @@ void CalculadoraU(void) {
         } else if (choice == 7) {
             LimpaTela(); break;
         }
+        Resposta((float)resultado);
     }
 }
 
 int main(void) {
     int choice = 0;
-
     while (1) {
+        LimpaTela();
         Cabecalho("Calculadora - Dinâmica", 0);
         puts(BOLD CYN_B_BK "\n\n     < OPÇÕES DE CALCULADORA >     "RST);
         Linha(39, 1, 0);
         puts("");
-        puts(BOLD MAG_B_BK " < 1 > " RST " - Calculadora Ciêntífica \n");
-        puts(BOLD MAG_B_BK " < 2 > " RST " - Calculadora Uni-Funcional \n");
+        puts(BOLD MAG_B_BK " < 1 > " RST BOLD " - Calculadora Ciêntífica \n");
+        puts(BOLD MAG_B_BK " < 2 > " RST BOLD " - Calculadora Uni-Funcional \n");
         Linha(39, 1, 0);
         choice = LerInt(" < ESCOLHA >   ");
+
         if (choice == 1) {
             puts("\n" BOLD GRN "Entrando na calculadora ciêntífica..aguarde");
             slep(1.0f);
@@ -468,13 +465,15 @@ int main(void) {
             slep(1.0f);
             LimpaTela();
             CalculadoraC();
+
         } else if (choice == 2) {
-            puts("Entrando na calculadora - UNI..aguarde");
+            puts("\n" BOLD GRN "Entrando na calculadora - UNI..aguarde");
             slep(1.0f);
-            puts("validando Cálculos e valores...");
+            puts("validando Cálculos e valores..." RST );
             slep(1.0f);
             LimpaTela();
             CalculadoraU();
+
         } else {
             LimpaTela();
             printf("\n\n< ESCOLHA INVÁLIDA TENTE NOVAMENTE >\n\n\n\n");
