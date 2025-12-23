@@ -14,8 +14,6 @@
 //IMPLEMENTAR SISTEMA DE LOGS DA CALCULADORA
 
 
-
-
 #define RST "\x1b[0m"        // Reseta tudo
 #define BOLD "\x1b[1m"       // "negrito"
 #define ITA "\x1b[3m"        // itálico
@@ -73,8 +71,7 @@ void slep(float tempo) {
     Sleep((int)(tempo * 1000));
 #else
     if (tempo <= 0.0f) return;
-    unsigned int t = (unsigned int) tempo;
-    sleep(t);
+    usleep((unsigned int)(tempo * 1000000));
 #endif
 }
 
@@ -116,7 +113,7 @@ void Linha(int tam, int tipo, int cor) {
     printf("\n");
 }
 
-void EspacoPrint(int tam) { for (int i = 0; i < tam; i++) printf(" "); }
+void EspacoPrint(int tam) { for (int i = 0; i < tam; i++) printf(" "); }  //Usar dps
 
 void Cabecalho(const char *title, int tipo) {
 
@@ -131,7 +128,7 @@ void Cabecalho(const char *title, int tipo) {
 }
 
 void Resposta(float valor) {
-    printf("      " BOLD BLK_B_BK " < RESPOSTA > " RST BOLD BLU_B_BK "  %.1f  " RST "\n" RST, valor);
+    printf("\n      " BOLD BLK_B_BK " < RESPOSTA > " RST BOLD BLU_B_BK "  %.1f  " RST "\n" RST, valor);
 }
 
 void ClearInputUntilNewline(void) {
@@ -166,16 +163,6 @@ float LerFloat(const char *msg) {
         if (scanf("%f", &v) == 1) { ClearInputUntilNewline(); return v; }
         printf("Entrada invalida! Digite um numero: ");
         ClearInputUntilNewline();
-    }
-}
-
-float LerFloatNaoZero(const char *msg, const char *erroMsg) {
-    float v;
-    while (1) {
-        v = LerFloat(msg);
-        if (v != 0.0f) return v;
-        if (erroMsg) printf("%s\n", erroMsg);
-        else printf("Valor nao pode ser 0. Tente novamente.\n");
     }
 }
 
@@ -270,7 +257,8 @@ void CalculadoraC(void) {
                 printf("\n");  num2 = LerDouble(" < Número > ");
                 estado = 1;
                 resposta = CalcularOperacaoC(op, num1, num2);
-            } else {
+            } else if (op == 8) { return; } 
+            else {
                 LimpaTela();
                 Linha(39, 1, 0);
                 printf(BOLD RED_B_BK " < ERRO > " RST BOLD RED_B "        ÍNDICE DE OPERADOR INVÁLIDO " RST "\n"); fflush(stdout);
@@ -323,56 +311,52 @@ void Fibonacci(int n) {
     Linha(39, 2, 7);
 }
 
-/* PA: lógica e interação separadas */
+/* PA: Lógica de Verificação Restabelecida */
 int VerificaPA_Logica(float a1, float a2, float razao) {
     if (razao == 0.0f) return 1;
     if (a1 < a2 && razao < 0.0f) return 2;
     if (a1 > a2 && razao > 0.0f) return 3;
+    // Nova regra: se o passo pula o fim
+    if (a1 < a2 && (a1 + razao) > a2) return 4;
+    if (a1 > a2 && (a1 + razao) < a2) return 5;
     return 0;
 }
-
-//ver logica de historico de contas feitas para cada caso se der ate usar .txt ou so no tempo de compilação mesmo
 
 bool VerificaPA_Interativo(float *a1, float *a2, float *razao) {
     while (1) {
         int code = VerificaPA_Logica(*a1, *a2, *razao);
         if (code == 0) return true;
-        if (code == 1) printf("A razão não pode ser 0!\n");
-        if (code == 2) printf("A razão de uma PA Crescente deve ser Positiva!\n");
-        if (code == 3) printf("A razão de uma PA Decrescente deve ser Negativa!\n");
-        char esc = LerCharSN("Deseja trocar algum dado para êxito? [S/N] ");
+        if (code == 1) printf(RED_B_BK "A razão não pode ser 0!" RST "\n");
+        if (code == 2) printf(RED_B_BK "A razão de uma PA Crescente deve ser Positiva!" RST "\n");
+        if (code == 3) printf(RED_B_BK "A razão de uma PA Decrescente deve ser Negativa!" RST "\n");
+        if (code == 4 || code == 5) printf(RED_B_BK "A razão é maior que a diferença total!" RST "\n");
+        
+        char esc = LerCharSN(BOLD CYN ITA "Deseja trocar algum dado para êxito? [S/N] " RST );
         if (esc == 'N') return false;
-        char sel = LerCharOpcao("Qual dado deseja mudar? [R=razao/I=inicio/F=fim]: ", "RIF");
-        if (sel == 'R' || sel == 'r') { *razao = LerFloat("Digite a nova Razão: "); continue; }
-        if (sel == 'I' || sel == 'i') { *a1 = LerFloat("Digite o novo Início: "); continue; }
-        if (sel == 'F' || sel == 'f') { *a2 = LerFloat("Digite o novo Fim: "); continue; }
+        char sel = LerCharOpcao(BOLD BLU ITA "Qual dado deseja mudar? [R=razao/I=inicio/F=fim]: " RST, "RIF");
+        if (sel == 'R' || sel == 'r') { *razao = LerFloat(BOLD BLU_B_BK "Digite a nova Razão: " RST " "); continue; }
+        if (sel == 'I' || sel == 'i') { *a1 = LerFloat(BOLD BLK_B_BK "Digite o novo Início:" RST " "); continue; }
+        if (sel == 'F' || sel == 'f') { *a2 = LerFloat(BOLD MAG_B_BK "Digite o novo Fim:" RST " "); continue; }
     }
 }
 
 void ImprimirPA(float a1, float a2, float razao) {
     if (a1 == a2) { printf("%.0f - \n", a1); return; }
-    if (a1 < a2 && razao > 0.0f) {
-        if (a1 + razao > a2) { printf("A razão é muito grande! A PA nao alcanca o valor final.\n"); return; }
-        for (float i = a1; i <= a2; i += razao) printf("%.0f - ", i);
-        printf("\n"); return;
+    if (a1 < a2) {
+        for (float i = a1; i <= a2; i += razao) printf("%.1f - ", i);
+    } else {
+        for (float i = a1; i >= a2; i += razao) printf("%.1f - ", i);
     }
-    if (a1 > a2 && razao < 0.0f) {
-        if (a1 + razao < a2) { printf("A razão é muito pequena! A PA nao alcanca o valor final.\n"); return; }
-        for (float i = a1; i >= a2; i += razao) printf("%.0f - ", i);
-        printf("\n"); return;
-    }
-    printf("Configuração inválida para imprimir PA.\n");
+    printf("\n");
 }
 
-void ProgressaoArTm(float a1, float a2, float razao) {
+int ProgressaoArTm(float a1, float a2, float razao) {
     while (1) {
-        if (!VerificaPA_Interativo(&a1, &a2, &razao)) break;
+        if (!VerificaPA_Interativo(&a1, &a2, &razao)) return 1;
         ImprimirPA(a1, a2, razao);
-        char cont = LerCharSN("\nDeseja calcular outra PA? [S/N]: ");
-        if (cont == 'N') { LimpaTela(); Cabecalho("Calculadora - UNI", 0); break; }
-        a1 = LerFloat("Digite o início da PA: ");
-        a2 = LerFloat("Digite o Número final da PA: ");
-        razao = LerFloatNaoZero("Digite a razão da PA: ", "A razão não pode valer 0:");
+        char cont = LerCharSN("\n" BOLD YEL_B "Deseja calcular outra PA? [S/N]:" RST " ");
+        if (cont == 'N') { return 1; }
+        else if (cont == 'S') { return 0;}
     }
 }
 
@@ -383,18 +367,18 @@ void CalculadoraU(void) {
     int choice = 0;
     const char *OP[] = {
 
-        BOLD "     <  " CYN_BK "  -- " BLU_BK " Adição          " BOLD MAG_BK " [  +  ]" BOLD GRN_BK "    --ID = 1 ",
-        BOLD "     <  " CYN_BK "  -- " BLU_BK " Subtração       " BOLD MAG_BK " [  -  ]" BOLD GRN_BK "    --ID = 2 ",
-        BOLD "     <  " CYN_BK "  -- " BLU_BK " Multiplicação   " BOLD MAG_BK " [  x  ]" BOLD GRN_BK "    --ID = 3 ", 
-        BOLD "     <  " CYN_BK "  -- " BLU_BK " Divisão         " BOLD MAG_BK " [  ÷  ]" BOLD GRN_BK "    --ID = 4 ",
-        BOLD "     <  " CYN_BK "  -- " BLU_BK " Fibonacci       " BOLD MAG_BK " [ 1-5 ]" BOLD GRN_BK "    --ID = 5 ",         
-        BOLD "     <  " CYN_BK "  -- " BLU_BK " Progressão      " BOLD MAG_BK " [ 2x5 ]" BOLD GRN_BK "    --ID = 6 ",
-        BOLD "     <  " CYN_BK "  -- " BLU_BK " Saída           " BOLD MAG_BK " [ ExT ]" BOLD GRN_BK "    --ID = 7 ",
+        BOLD "     <  " CYN_BK "  -- " BLU_BK " Adição          " BOLD MAG_BK " [  +  ] " BOLD GRN_BK "    --ID = 1 ",
+        BOLD "     <  " CYN_BK "  -- " BLU_BK " Subtração       " BOLD MAG_BK " [  -  ] " BOLD GRN_BK "    --ID = 2 ",
+        BOLD "     <  " CYN_BK "  -- " BLU_BK " Multiplicação   " BOLD MAG_BK " [  x  ] " BOLD GRN_BK "    --ID = 3 ", 
+        BOLD "     <  " CYN_BK "  -- " BLU_BK " Divisão         " BOLD MAG_BK " [  ÷  ] " BOLD GRN_BK "    --ID = 4 ",
+        BOLD "     <  " CYN_BK "  -- " BLU_BK " Fibonacci       " BOLD MAG_BK " [ 1-5 ] " BOLD GRN_BK "    --ID = 5 ",         
+        BOLD "     <  " CYN_BK "  -- " BLU_BK " Progressão      " BOLD MAG_BK " [ 2x5 ] " BOLD GRN_BK "    --ID = 6 ",
+        BOLD "     <  " CYN_BK "  -- " BLU_BK " Saída           " BOLD MAG_BK " [ ExT ] " BOLD GRN_BK "    --ID = 7 ",
     };
 
-    Cabecalho("Calculadora - UNI", 0);
-
     while (1) {
+        LimpaTela();
+        Cabecalho("Calculadora - UNI", 0);
         printf("\n");
         printf("\n" BOLD BLK_B_BK "< Operações Permitidas >" RST "\n");
         Linha(39, 1, 0);
@@ -407,41 +391,50 @@ void CalculadoraU(void) {
 
         choice = LerInt(" < Escolha > "); printf("\n");
         Linha(39, 1, 0);
-        if (choice < 1 || choice > 7) { printf("Dado Invalido\n"); continue; }
-        if (choice == 1) {
-            num1 = LerDouble(" < Número >   ");
-            num2 = LerDouble(" < Número >   ");
-            LimpaTela(); Cabecalho("Calculadora - UNI", 0); printf("\n");
-            resultado = AdiU(num1, num2);
-        } else if (choice == 2) {
-            num1 = LerDouble("< Número >   ");
-            num2 = LerDouble("< Número >   ");
-            LimpaTela(); Cabecalho("Calculadora - UNI", 0);
-            resultado = SubU(num1, num2);
-        } else if (choice == 3) {
-            num1 = LerDouble("< Número >  ");
-            num2 = LerDouble("< Número >  ");
-            LimpaTela(); Cabecalho("Calculadora - UNI", 0);
-            resultado = MultiU(num1, num2);
-        } else if (choice == 4) {
-            num1 = LerDouble("< Número >   ");
-            num2 = LerDouble("< Número >   ");
-            LimpaTela(); Cabecalho("Calculadora - UNI", 0);
-            resultado = DiviU(num1, num2);
-        } else if (choice == 5) {
-            Fb = (float)LerInt(" < Número de Termos: ");
-            printf("\n\n");
-            Fibonacci((int)Fb);
-            continue;
-        } else if (choice == 6) {
-            float a1 = LerFloat("Digite o início da PA: ");
-            float a2 = LerFloat("Digite o Número final da PA: ");
-            float a3 = LerFloatNaoZero("Digite a razão da PA: ", "A razão não pode valer 0:");
-            ProgressaoArTm(a1, a2, a3);
-        } else if (choice == 7) {
-            LimpaTela(); break;
+        if (choice == 7) break;
+        if (choice < 1 || choice > 7) { printf("Dado Invalido\n"); slep(1); continue; }
+        
+        switch (choice) {
+            case 1:
+                num1 = LerDouble(" < Número >   ");
+                num2 = LerDouble(" < Número >   ");
+                resultado = AdiU(num1, num2);
+                break;
+            case 2:
+                num1 = LerDouble("< Número >   ");
+                num2 = LerDouble("< Número >   ");
+                resultado = SubU(num1, num2);
+                break;
+            case 3:
+                num1 = LerDouble("< Número >  ");
+                num2 = LerDouble("< Número >  ");
+                resultado = MultiU(num1, num2);
+                break;
+            case 4:
+                num1 = LerDouble("< Número >   ");
+                num2 = LerDouble("< Número >   ");
+                resultado = DiviU(num1, num2);
+                break;
+            case 5:
+                Fb = (float)LerInt(" < Número de Termos ");
+                printf("\n\n");
+                Fibonacci((int)Fb);
+                slep(2);
+                continue;
+            case 6: {
+                int fluxo = 0;
+                while (fluxo == 0) {
+                    float a1 = LerFloat(BOLD MAG_B "Digite o início da PA > " RST " ");
+                    float a2 = LerFloat(BOLD BLU_B "Digite o Número final da PA > " RST " ");
+                    float a3 = LerFloat(BOLD MAG_B "Digite a razão da PA > " RST " ");
+                    fluxo = ProgressaoArTm(a1, a2, a3);
+                    LimpaTela(); Cabecalho("Calculadora - UNI", 0);
+                }
+                continue;
+            }
         }
         Resposta((float)resultado);
+        slep(2);
     }
 }
 
@@ -477,6 +470,7 @@ int main(void) {
         } else {
             LimpaTela();
             printf("\n\n< ESCOLHA INVÁLIDA TENTE NOVAMENTE >\n\n\n\n");
+            slep(1.5f);
         }
     }
     return 0;
