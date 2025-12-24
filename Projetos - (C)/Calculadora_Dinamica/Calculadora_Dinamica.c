@@ -15,47 +15,50 @@
 
 
 #define RST "\x1b[0m"        // Reseta tudo
-#define BOLD "\x1b[1m"       // "negrito"
-#define ITA "\x1b[3m"        // itálico
-#define UDL "\x1b[4m"        // sublinhado
-#define REV "\x1b[7m"        // reverso (inverte as cores fg/bg)
+#define BOLD "\x1b[1m"       // Negrito
+#define ITA "\x1b[3m"        // Itálico
+#define UDL "\x1b[4m"        // Sublinhado
+#define REV "\x1b[7m"        // Reverso
 
+#define BLK "\x1b[30m"       // Texto preto
+#define RED "\x1b[31m"       // Texto vermelho
+#define GRN "\x1b[32m"       // Texto verde
+#define YEL "\x1b[33m"       // Texto amarelo
+#define BLU "\x1b[34m"       // Texto azul
+#define MAG "\x1b[35m"       // Texto magenta
+#define CYN "\x1b[36m"       // Texto ciano
+#define WHT "\x1b[37m"       // Texto branco / cinza claro
+#define GRY "\x1b[90m"       // Texto cinza escuro
 
-#define BLK "\x1b[30m"       //  1 - texto preto
-#define RED "\x1b[31m"       //  2 - Texto vermelho
-#define GRN "\x1b[32m"       //  3 - Texto verde
-#define YEL "\x1b[33m"       //  4 - Texto amarelo
-#define BLU "\x1b[34m"       //  5 - Texto azul
-#define MAG "\x1b[35m"       //  6 - Texto magenta
-#define CYN "\x1b[36m"       //  7 - Texto ciano
-#define WHT "\x1b[37m"       //  8 - Texto branco / cinza claro
+#define BLK_B "\x1b[90m"     // Texto preto brilhante (cinza escuro)
+#define RED_B "\x1b[91m"     // Texto vermelho brilhante
+#define GRN_B "\x1b[92m"     // Texto verde brilhante
+#define YEL_B "\x1b[93m"     // Texto amarelo brilhante
+#define BLU_B "\x1b[94m"     // Texto azul brilhante
+#define MAG_B "\x1b[95m"     // Texto magenta brilhante
+#define CYN_B "\x1b[96m"     // Texto ciano brilhante
+#define WHT_B "\x1b[97m"     // Texto branco brilhante
+#define GRY_B "\x1b[37m"     // Texto cinza claro
 
-#define BLK_B "\x1b[90m"     //  9 - Texto preto brilhante (cinza escuro)
-#define RED_B "\x1b[91m"     // 10 - Texto vermelho brilhante
-#define GRN_B "\x1b[92m"     // 11 - Texto verde brilhante
-#define YEL_B "\x1b[93m"     // 12 - Texto amarelo brilhante
-#define BLU_B "\x1b[94m"     // 13 - Texto azul brilhante
-#define MAG_B "\x1b[95m"     // 14 - Texto magenta brilhante
-#define CYN_B "\x1b[96m"     // 15 - Texto ciano brilhante
-#define WHT_B "\x1b[97m"     // 16 - Texto branco brilhante
+#define BLK_BK "\x1b[40m"    // Fundo preto
+#define RED_BK "\x1b[41m"    // Fundo vermelho
+#define GRN_BK "\x1b[42m"    // Fundo verde
+#define YEL_BK "\x1b[43m"    // Fundo amarelo
+#define BLU_BK "\x1b[44m"    // Fundo azul
+#define MAG_BK "\x1b[45m"    // Fundo magenta
+#define CYN_BK "\x1b[46m"    // Fundo ciano
+#define WHT_BK "\x1b[47m"    // Fundo branco / cinza claro
+#define GRY_BK "\x1b[100m"   // Fundo cinza escuro
 
-#define BLK_BK "\x1b[40m"    // 17 - Fundo preto
-#define RED_BK "\x1b[41m"    // 18 - Fundo vermelho
-#define GRN_BK "\x1b[42m"    // 19 - Fundo verde
-#define YEL_BK "\x1b[43m"    // 20 - Fundo amarelo
-#define BLU_BK "\x1b[44m"    // 21 - Fundo azul
-#define MAG_BK "\x1b[45m"    // 22 - Fundo magenta
-#define CYN_BK "\x1b[46m"    // 23 - Fundo ciano
-#define WHT_BK "\x1b[47m"    // 24 - Fundo branco
-
-#define BLK_B_BK "\x1b[100m" // 25 - Fundo preto brilhante (cinza escuro)
-#define RED_B_BK "\x1b[101m" // 26 - Fundo vermelho brilhante
-#define GRN_B_BK "\x1b[102m" // 27 - Fundo verde brilhante
-#define YEL_B_BK "\x1b[103m" // 28 - Fundo amarelo brilhante
-#define BLU_B_BK "\x1b[104m" // 29 - Fundo azul brilhante
-#define MAG_B_BK "\x1b[105m" // 30 - Fundo magenta brilhante
-#define CYN_B_BK "\x1b[106m" // 31 - Fundo ciano brilhante
-#define WHT_B_BK "\x1b[107m" // 32 - Fundo branco brilhante
+#define BLK_B_BK "\x1b[100m" // Fundo preto brilhante (cinza escuro)
+#define RED_B_BK "\x1b[101m" // Fundo vermelho brilhante
+#define GRN_B_BK "\x1b[102m" // Fundo verde brilhante
+#define YEL_B_BK "\x1b[103m" // Fundo amarelo brilhante
+#define BLU_B_BK "\x1b[104m" // Fundo azul brilhante
+#define MAG_B_BK "\x1b[105m" // Fundo magenta brilhante
+#define CYN_B_BK "\x1b[106m" // Fundo ciano brilhante
+#define WHT_B_BK "\x1b[107m" // Fundo branco brilhante
+#define GRY_B_BK "\x1b[47m"  // Fundo cinza claro
 
 
 void LimpaTela(void) {
@@ -139,7 +142,7 @@ void ClearInputUntilNewline(void) {
 int LerInt(const char *msg) {
     int v;
     while (1) {
-        if (msg) { printf(BOLD CYN_B_BK "%s" RST, msg); printf(" > "); } //colocar em todos estilos legais
+        if (msg) { printf(BOLD CYN_B_BK "%s" RST, msg); printf(" "); } //colocar em todos estilos legais
         if (scanf("%d", &v) == 1) { ClearInputUntilNewline(); return v; }
         printf("Entrada invalida! Digite um numero inteiro: ");
         ClearInputUntilNewline();
@@ -149,12 +152,21 @@ int LerInt(const char *msg) {
 double LerDouble(const char *msg) {
     double v;
     while (1) {
-        if (msg) { printf(BOLD BLU_B_BK "%s" RST, msg); printf(" > "); }
-        if (scanf("%lf", &v) == 1) { ClearInputUntilNewline(); return v; }
-        printf("Entrada invalida! Digite um numero: ");
+        if (msg) {
+            printf(BOLD BLU_B_BK "%s" RST, msg); printf(" ");
+            fflush(stdout);
+        }
+
+        if (scanf("%lf", &v) == 1) {
+            ClearInputUntilNewline();
+            return v;
+        }
+
+        printf(RED "Entrada invalida! Digite um numero: " RST);
         ClearInputUntilNewline();
     }
 }
+
 
 float LerFloat(const char *msg) {
     float v;
@@ -243,7 +255,7 @@ void CalculadoraC(void) {
         if (estado == 0) {
             Cabecalho("Calculadora Científica", 0);
             printf("\n");  num1 = LerDouble(" < Número > ");
-            printf("\n" BOLD BLK_B_BK " < Operações Permitidas > " RST "\n");
+            printf("\n" BLK_B_BK " < Operações Permitidas > " RST "\n");
             Linha(30, 1, 0);
             for (int i = 0; i < 8; ++i) {
                 // Primeira função Negrito para o sinal "<" e para as demais ate o RST = reset, depois Ciano para o "--" depois reset depois Azul para os valores do vetor  
@@ -261,19 +273,20 @@ void CalculadoraC(void) {
             else {
                 LimpaTela();
                 Linha(39, 1, 0);
-                printf(BOLD RED_B_BK " < ERRO > " RST BOLD RED_B "        ÍNDICE DE OPERADOR INVÁLIDO " RST "\n"); fflush(stdout);
+                printf(RED_B_BK " < ERRO > " RST BOLD RED_B "        ÍNDICE DE OPERADOR INVÁLIDO " RST "\n"); fflush(stdout);
                 Linha(39, 1, 0);
             }
         } else if (estado == 1) {
             LimpaTela();
             Cabecalho("Calculadora - Científica", 0);
-            printf("\n < Operações Permitidas >\n");
+            printf("\n" BLK_B_BK " < Operações Permitidas > " RST "\n");
             Linha(39, 1, 0);
-            for (int i = 0; i < 8; ++i) printf(" %s " RST BOLD "  >  " "\n" RST , OP[i]);
+            for (int i = 0; i < 8; ++i) printf(" %s " RST BOLD "  >  " RST "\n", OP[i]);
             Linha(39, 1, 0);
-            printf("\t\t");
+            printf("\t\t\n");
             Resposta((float)resposta);
-            op = LerInt("\n     < Operador >   ");
+            printf("\n\n");
+            op = LerInt("    < Operador >   ");
             if (op < 1 || op > 8) {
                 LimpaTela();
                 Linha(39, 1, 0);
@@ -284,7 +297,7 @@ void CalculadoraC(void) {
             }
             if (op == 8) return;
             if (op == 6) { resposta = RaizC(resposta); continue; }
-            num2 = LerDouble("\n      < Número >   ");
+            num2 = LerDouble("      < Número >   ");
             resposta = CalcularOperacaoC(op, resposta, num2);
         }
     }
@@ -303,12 +316,24 @@ void GerarFibonacci(float *vet, int tamanho) {
     }
 }
 
+void Contador(int cont) {
+    for (int i = 1; i <= cont; i++) {
+        printf(BLU_B_BK "\r < Contador Para Reinício > " BLK_B_BK "  %d  " RST, i);
+        fflush(stdout);
+        sleep(1);
+    }
+    printf("\n");
+}
+
 void Fibonacci(int n) {
     if (n <= 0) return;
     float *vet = malloc((size_t)n * sizeof(float));
     if (!vet) { printf(RED_B_BK" Erro ao alocar memória! " RST "\n"); return; }
+    printf(BLU_B_BK " Sequencia > " BLK_B_BK ITA " FIBONACCI " RST ); printf("\n\n");
     GerarFibonacci(vet, n);
     Linha(39, 2, 7);
+    Contador(5);
+
 }
 
 /* PA: Lógica de Verificação Restabelecida */
@@ -341,11 +366,21 @@ bool VerificaPA_Interativo(float *a1, float *a2, float *razao) {
 }
 
 void ImprimirPA(float a1, float a2, float razao) {
-    if (a1 == a2) { printf("%.0f - \n", a1); return; }
+    LimpaTela();
+    printf("\n" BLU_B_BK " Progressão > " BLK_B_BK ITA " ARITMÉTICA " RST ); printf("\n\n");
+    if (a1 == a2) { printf("\n" BLK_B_BK " %.0f " RST "\n", a1); return; }
     if (a1 < a2) {
-        for (float i = a1; i <= a2; i += razao) printf("%.1f - ", i);
+        for (float i = a1; i <= a2; i += razao) {
+            printf(BLK_B_BK " %.0f " RST, i);
+            if (i < a2) printf(" - ");
+            else printf(" > ");
+        }
     } else {
-        for (float i = a1; i >= a2; i += razao) printf("%.1f - ", i);
+        for (float i = a1; i >= a2; i += razao) {
+            printf(BLK_B_BK " %.0f " RST, i);
+            if (i < a2) printf(" - ");
+            else printf(" >  -  FIM");
+        }
     }
     printf("\n");
 }
@@ -367,25 +402,24 @@ void CalculadoraU(void) {
     int choice = 0;
     const char *OP[] = {
 
-        BOLD "     <  " CYN_BK "  -- " BLU_BK " Adição          " BOLD MAG_BK " [  +  ] " BOLD GRN_BK "    --ID = 1 ",
-        BOLD "     <  " CYN_BK "  -- " BLU_BK " Subtração       " BOLD MAG_BK " [  -  ] " BOLD GRN_BK "    --ID = 2 ",
-        BOLD "     <  " CYN_BK "  -- " BLU_BK " Multiplicação   " BOLD MAG_BK " [  x  ] " BOLD GRN_BK "    --ID = 3 ", 
-        BOLD "     <  " CYN_BK "  -- " BLU_BK " Divisão         " BOLD MAG_BK " [  ÷  ] " BOLD GRN_BK "    --ID = 4 ",
-        BOLD "     <  " CYN_BK "  -- " BLU_BK " Fibonacci       " BOLD MAG_BK " [ 1-5 ] " BOLD GRN_BK "    --ID = 5 ",         
-        BOLD "     <  " CYN_BK "  -- " BLU_BK " Progressão      " BOLD MAG_BK " [ 2x5 ] " BOLD GRN_BK "    --ID = 6 ",
-        BOLD "     <  " CYN_BK "  -- " BLU_BK " Saída           " BOLD MAG_BK " [ ExT ] " BOLD GRN_BK "    --ID = 7 ",
+        BOLD "     <  " CYN_BK " -- " BLU_BK " Adição          " BOLD MAG_BK " [  +  ] " BOLD GRN_BK "    --ID = 1 ",
+        BOLD "     <  " CYN_BK " -- " BLU_BK " Subtração       " BOLD MAG_BK " [  -  ] " BOLD GRN_BK "    --ID = 2 ",
+        BOLD "     <  " CYN_BK " -- " BLU_BK " Multiplicação   " BOLD MAG_BK " [  x  ] " BOLD GRN_BK "    --ID = 3 ", 
+        BOLD "     <  " CYN_BK " -- " BLU_BK " Divisão         " BOLD MAG_BK " [  ÷  ] " BOLD GRN_BK "    --ID = 4 ",
+        BOLD "     <  " CYN_BK " -- " BLU_BK " Fibonacci       " BOLD MAG_BK " [ 1-5 ] " BOLD GRN_BK "    --ID = 5 ",         
+        BOLD "     <  " CYN_BK " -- " BLU_BK " Progressão      " BOLD MAG_BK " [ 2x5 ] " BOLD GRN_BK "    --ID = 6 ",
+        BOLD "     <  " CYN_BK " -- " BLU_BK " Saída           " BOLD MAG_BK " [ ExT ] " BOLD GRN_BK "    --ID = 7 ",
     };
 
+    Cabecalho("Calculadora - UNI", 0);
     while (1) {
-        LimpaTela();
-        Cabecalho("Calculadora - UNI", 0);
         printf("\n");
-        printf("\n" BOLD BLK_B_BK "< Operações Permitidas >" RST "\n");
+        printf("\n" BOLD BLK_B_BK " < Operações Permitidas > " RST "\n");
         Linha(39, 1, 0);
 
         for (int i = 0; i < 7; ++i) {
             printf(" %s " RST BOLD "  >  " "\n" RST , OP[i]);
-            slep(0.05f);
+            slep(0.02f);
             if (i == 6) { Linha(39, 1, 0); }
         }
 
@@ -396,37 +430,41 @@ void CalculadoraU(void) {
         
         switch (choice) {
             case 1:
-                num1 = LerDouble(" < Número >   ");
-                num2 = LerDouble(" < Número >   ");
+                num1 = LerDouble("  < Número >   ");
+                num2 = LerDouble("\n  < Número >   ");
                 resultado = AdiU(num1, num2);
+                LimpaTela();
                 break;
             case 2:
-                num1 = LerDouble("< Número >   ");
-                num2 = LerDouble("< Número >   ");
+                num1 = LerDouble("  < Número >   ");
+                num2 = LerDouble("\n  < Número >   ");
                 resultado = SubU(num1, num2);
+                LimpaTela();
                 break;
             case 3:
-                num1 = LerDouble("< Número >  ");
-                num2 = LerDouble("< Número >  ");
+                num1 = LerDouble("  < Número >  ");
+                num2 = LerDouble("\n  < Número >  ");
                 resultado = MultiU(num1, num2);
+                LimpaTela();
                 break;
             case 4:
-                num1 = LerDouble("< Número >   ");
-                num2 = LerDouble("< Número >   ");
+                num1 = LerDouble("  < Número >   ");
+                num2 = LerDouble("\n  < Número >   ");
                 resultado = DiviU(num1, num2);
+                LimpaTela();
                 break;
             case 5:
-                Fb = (float)LerInt(" < Número de Termos ");
-                printf("\n\n");
+                Fb = (float)LerInt("  < Número de Termos > ");
+                LimpaTela();
                 Fibonacci((int)Fb);
-                slep(2);
+                slep(0.5f);
                 continue;
             case 6: {
                 int fluxo = 0;
                 while (fluxo == 0) {
-                    float a1 = LerFloat(BOLD MAG_B "Digite o início da PA > " RST " ");
-                    float a2 = LerFloat(BOLD BLU_B "Digite o Número final da PA > " RST " ");
-                    float a3 = LerFloat(BOLD MAG_B "Digite a razão da PA > " RST " ");
+                    float a1 = LerFloat(BOLD MAG_B " Digite o início da PA > " RST " ");
+                    float a2 = LerFloat(BOLD BLU_B " Digite o Número final da PA > " RST " ");
+                    float a3 = LerFloat(BOLD MAG_B " Digite a razão da PA > " RST " ");
                     fluxo = ProgressaoArTm(a1, a2, a3);
                     LimpaTela(); Cabecalho("Calculadora - UNI", 0);
                 }
@@ -434,7 +472,6 @@ void CalculadoraU(void) {
             }
         }
         Resposta((float)resultado);
-        slep(2);
     }
 }
 
@@ -449,7 +486,7 @@ int main(void) {
         puts(BOLD MAG_B_BK " < 1 > " RST BOLD " - Calculadora Ciêntífica \n");
         puts(BOLD MAG_B_BK " < 2 > " RST BOLD " - Calculadora Uni-Funcional \n");
         Linha(39, 1, 0);
-        choice = LerInt(" < ESCOLHA >   ");
+        choice = LerInt(" < ESCOLHA >  ");
 
         if (choice == 1) {
             puts("\n" BOLD GRN "Entrando na calculadora ciêntífica..aguarde");
